@@ -12,3 +12,4 @@ selenium
 sqlalchemy 
 python-dotenv
 mysql-connector-python
+pymysql 
