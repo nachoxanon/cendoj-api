@@ -1,10 +1,10 @@
 from bson.json_util import dumps
 import random
 
-from bson.json_util import dumps
+#from bson.json_util import dumps
 from flask import Flask, jsonify
 from flask import Flask, redirect, url_for, request, render_template, make_response
-from Tools.mongo_tools import all_sentences_byname
+#from Tools.mongo_tools import all_sentences_byname
 import markdown.extensions.fenced_code
 from Tools.sql_tools import *
 
