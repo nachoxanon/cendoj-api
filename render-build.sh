@@ -28,5 +28,3 @@ if [[ ! -d $STORAGE_DIR/chromedriver ]]; then
 else
   echo "...Using ChromeDriver from cache"
 fi
-
-# No necesitas instalar dependencias aquí si ya lo haces en el Build Command de Render
