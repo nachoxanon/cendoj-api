@@ -1,53 +1,19 @@
-import random
-from flask import Flask, jsonify, request, render_template
-import markdown.extensions.fenced_code
-from Tools.sql_tools import *
+# Importa las nuevas librerías al inicio del archivo
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
-app = Flask(__name__)
+# ... dentro de la función que realiza el scraping, reemplaza la línea que crea el driver ...
 
-@app.route("/")
-def index():
-    readme_file = open("README.md", "r")
-    md_template = markdown.markdown(readme_file.read(), extensions=["fenced_code"])
-    return md_template
+# Configuración para que Chrome funcione en el servidor de Render
+chrome_options = Options()
+chrome_options.add_argument("--headless=new")  # Modo invisible (necesario en servidores)
+chrome_options.add_argument("--no-sandbox")    # Recomendado para entornos Linux
+chrome_options.add_argument("--disable-dev-shm-usage") # Para evitar problemas de memoria
 
-@app.route("/all")
-def all_from_sql():
-    try:
-        lines = get_all_from_sql()
-        return jsonify(lines)
-    except Exception as e:
-        return jsonify({'error': str(e)})
-
-@app.route("/random-number")
-def random_number():
-    return str(random.choice(range(0, 1000)))
-
-@app.route("/count/<variable>")
-def count_with_variable(variable):
-    try:
-        lines = get_count_with_variable(variable)
-        return jsonify(lines)
-    except Exception as e:
-        return jsonify({'error': str(e)})
-
-@app.route("/all/<variable>/<name>")
-def all_with_variable(variable, name):
-    try:
-        lines = get_all_with_variable(variable, name)
-        return jsonify(lines)
-    except Exception as e:
-        return jsonify({'error': str(e)})
-
-@app.route("/post/", methods=['POST', 'GET'])
-def gfg():
-    if request.method == "POST":
-        link = request.form.get("fname")
-        downloading_sentence(link)
-        data_sentencia = regex_court_sentence_file()
-        uploading_sql(data_sentencia)
-        return jsonify(data_sentencia)
-    return render_template("login.html")
-
-if __name__ == '__main__':
-    app.run(debug=True)
+# ¡Aquí está la magia! ChromeDriverManager se encarga de todo
+driver = webdriver.Chrome(
+    service=Service(ChromeDriverManager().install()),
+    options=chrome_options
+)
