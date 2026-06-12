@@ -3,7 +3,9 @@ gunicorn
 requests
 beautifulsoup4
 psycopg2-binary
+pymongo
 markdown
 numpy
-pandas 
+pandas
 PyPDF2
+selenium
