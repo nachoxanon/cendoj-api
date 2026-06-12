@@ -10,3 +10,4 @@ pandas
 PyPDF2
 selenium
 sqlalchemy 
+python-dotenv
