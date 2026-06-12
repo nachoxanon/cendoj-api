@@ -13,3 +13,4 @@ sqlalchemy
 python-dotenv
 mysql-connector-python
 pymysql 
+webdriver-manager==4.0.1
